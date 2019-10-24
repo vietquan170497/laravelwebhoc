@@ -10,12 +10,11 @@
                 <div class="panel-body">
                     <div class="position-center">
                         <?php
-                        $message = Session::get('message');
-                        if($message){
-                            echo '<div class="alert alert-success" style="text-align: center">'.$message.'</div>';
-                            Session::put('message',null);
-                        }
-
+                            $message = Session::get('message');
+                            if($message){
+                                echo '<div class="alert alert-success" style="text-align: center">'.$message.'</div>';
+                                Session::put('message',null);
+                            }
                         ?>
                         @if(count($errors)>0)
                             <div class="alert alert-danger" style="text-align: center">
@@ -42,6 +41,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-info" id="btn_submit">Thêm</button>
+                            <input type="button" class="btn btn-info" value="Làm mới">
                             <a href="admin/loaikhoahoc/danhsach"><input type="button" class="btn btn-info" value="Hủy"></a>
                         </form>
                     </div>

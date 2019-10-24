@@ -27,6 +27,14 @@
                         <form role="form" action="admin/khoahoc/luu" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <div class="form-group">
+                                <label for="exampleInputEmail1">Loại khóa học</label>
+                                <select class="form-control m-bot15" name="LoaiKhoaHoc">
+                                    @foreach($loaikhoahoc as $lkh)
+                                        <option value="{{$lkh->id}}}">{{$lkh->Ten}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Tên khóa học</label>
                                 <input type="text" name="Ten" class="form-control" id="" placeholder="Nhập tên khóa học">
                             </div>
@@ -51,14 +59,7 @@
                                 <label for="exampleInputEmail1">Giá khóa học</label>
                                 <input type="text" name="GiaKhoaHoc" class="form-control" id="gia" placeholder="Nhập giá khóa học (với trường hợp khóa học trả phí)" disabled>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Loại khóa học</label>
-                                <select class="form-control m-bot15" name="LoaiKhoaHoc">
-                                    @foreach($loaikhoahoc as $lkh)
-                                        <option value="{{$lkh->id}}}">{{$lkh->Ten}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Active</label>
@@ -67,9 +68,9 @@
                                     <option value="1">Active</option>
                                 </select>
                             </div>
-
-
                             <button type="submit" class="btn btn-info">Thêm</button>
+                            <input type="button" class="btn btn-info" value="Làm mới">
+                            <a href="admin/khoahoc/danhsach"><input type="button" class="btn btn-info" value="Hủy"></a>
                         </form>
                     </div>
 

@@ -32,7 +32,6 @@
                                 </div>
                                 <button type="submit" class="btn btn-info">Sửa</button>
                                 <a href="admin/loaikhoahoc/danhsach"><input type="button" class="btn btn-info" value="Hủy"></a>
-
                             </form>
                         @endforeach
                     </div>

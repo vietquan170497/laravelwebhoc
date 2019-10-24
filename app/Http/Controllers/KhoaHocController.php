@@ -19,13 +19,37 @@ class KhoaHocController extends Controller
         return view('admin.khoahoc.them')->with('loaikhoahoc',$loaikhoahoc);
     }
     public function getDanhSach(){
-        $danhsach = DB::table('loaikhoahoc')->get();
-        $loaikhoahoc = view('admin.loaikhoahoc.danhsach')->with('loaikhoahoc',$danhsach );
+        $loaikhoahoc = DB::table('loaikhoahoc')->orderBy('id','asc')->get();
+        $khoahoc = DB::table('khoahoc')->orderBy('id','asc')->get();
 
-        return view('admin.index')->with('admin.loaikhoahoc.danhsach',$loaikhoahoc);
+        return view('admin.khoahoc.danhsach')->with('khoahoc',$khoahoc)->with('loaikhoahoc',$loaikhoahoc);
     }
 
     public function postLuu(Request $request){
+        $this->validate($request,
+            [
+                'LoaiKhoaHoc'=>'required',
+                'Ten'=>'required|min:3|unique:KhoaHoc,Ten',
+                'TomTat'=>'required',
+                'HinhAnh'=>'required',
+            ],
+            [
+                'LoaiKhoaHoc.required'=>'Bạn chưa chọn loại khóa học',
+                'Ten.required'=>'Bạn chưa điền tên khóa học',
+                'Ten.min'=>'Tiêu đề phải ít nhất 3 kí tự',
+                'Ten.unique'=>'Tên khóa học đã tồn tại',
+                'TomTat.required'=>'Bạn chưa nhập tóm tắt',
+                'HinhAnh.required'=>'Bạn chưa chọn hình ảnh',
+            ]);
+        if($request->TraPhi==1){
+            $this->validate($request,
+                [
+                    'GiaKhoaHoc'=>'required|min:6',
+                ],[
+                    'GiaKhoaHoc.required'=>'Bạn chưa nhập giá khóa học',
+                    'GiaKhoaHoc.min'=>'Giá phải ít nhất 100.000 VNĐ',
+                ]);
+        }
         $data = array();
         $data['Ten'] = $request->Ten;
         $data['TomTat'] = $request->TomTat;
@@ -54,42 +78,84 @@ class KhoaHocController extends Controller
             $get_hinhanh->move("upload/khoahoc",$hinh);
             $data['HinhAnh'] = $hinh;
         }else{
-            $data['HinhAnh']->Hinh = "";
+            $data['HinhAnh'] = "";
         }
 
         DB::table('khoahoc')->insert($data);
 
-        Session::put('message','Thêm khóa học thành công');
-        return Redirect::to('admin/khoahoc/them');
-
+        return redirect('admin/khoahoc/them')->with('message','Bạn thêm thành công');
     }
 
     public function getDeactive($id){
-        DB::table('loaikhoahoc')->where('id',$id)->update(['TrangThai'=>1]);
+        DB::table('khoahoc')->where('id',$id)->update(['TrangThai'=>1]);
         Session::put('message','Trạng thái với id = '.$id.' được Hiện');
-        return Redirect::to('admin/loaikhoahoc/danhsach');
+        return Redirect::to('admin/khoahoc/danhsach');
     }
 
     public function getActive($id){
-        DB::table('loaikhoahoc')->where('id',$id)->update(['TrangThai'=>0]);
+        DB::table('khoahoc')->where('id',$id)->update(['TrangThai'=>0]);
         Session::put('message','Trạng thái với id = '.$id.' được Ẩn');
-        return Redirect::to('admin/loaikhoahoc/danhsach');
+        return Redirect::to('admin/khoahoc/danhsach');
     }
 
     public function getSua($id){
-        $sua = DB::table('loaikhoahoc')->where('id',$id)->get();
-        $loaikhoahoc = view('admin.loaikhoahoc.sua')->with('loaikhoahoc',$sua );
+        $loaikhoahoc = DB::table('loaikhoahoc')->orderBy('id','asc')->get();
+        $khoahoc = DB::table('khoahoc')->where('id',$id)->get();
 
-        return view('admin.index')->with('admin.loaikhoahoc.sua',$loaikhoahoc);
+        return view('admin.khoahoc.sua')->with('khoahoc',$khoahoc)->with('loaikhoahoc',$loaikhoahoc);
 
     }
     public function postSua($id, Request $request){
+        $this->validate($request,
+            [
+                'LoaiKhoaHoc'=>'required',
+                'Ten'=>'required|min:3|',
+                'TomTat'=>'required',
+            ],
+            [
+                'LoaiKhoaHoc.required'=>'Bạn chưa chọn loại khóa học',
+                'Ten.required'=>'Bạn chưa điền tên khóa học',
+                'Ten.min'=>'Tiêu đề phải ít nhất 3 kí tự',
+                'TomTat.required'=>'Bạn chưa nhập tóm tắt',
+            ]);
+        if($request->TraPhi==1){
+            $this->validate($request,
+                [
+                    'GiaKhoaHoc'=>'required|min:6',
+                ],[
+                    'GiaKhoaHoc.required'=>'Bạn chưa nhập giá khóa học',
+                    'GiaKhoaHoc.min'=>'Giá phải ít nhất 100.000 VNĐ',
+                ]);
+        }
+        $khoahoc = DB::table('khoahoc')->where('id',$id)->get();
         $data = array();
         $data['Ten'] = $request->Ten;
-        DB::table('loaikhoahoc')->where('id',$id)->update($data);
+        $data['TomTat'] = $request->TomTat;
+        $data['TraPhi'] = $request->TraPhi;
 
-        Session::put('message','Loại khóa học với id = '.$id.' sửa thành công');
-        return Redirect::to('admin/loaikhoahoc/danhsach');
+        $data['idLoaiKhoaHoc'] = $request->LoaiKhoaHoc;
+        $data['TrangThai'] = $request->TrangThai;
+        $data['GiaKhoaHoc'] = $request->GiaKhoaHoc;
+
+        $get_hinhanh = $request->file('HinhAnh');
+        if($get_hinhanh){
+            $duoi = $get_hinhanh->getClientOriginalExtension();
+            if($duoi != 'jpg' && $duoi != 'png' && $duoi = 'jpeg'){
+                return redirect('admin/khoahoc/them')->with('loi','Bạn chỉ chọn file có đuôi jpg, png, jpeg');
+            }
+            $name = $get_hinhanh->getClientOriginalName();
+            $hinh = str_random(4)."_".$name;
+            while (file_exists("upload/khoahoc/".$hinh)){
+                $hinh = str_random(4)."_".$name;
+            }
+            unlink("upload/khoahoc/".$khoahoc->HinhAnh);
+            $get_hinhanh->move("upload/khoahoc",$hinh);
+            $data['HinhAnh'] = $hinh;
+        }
+
+        DB::table('khoahoc')->where('id',$id)->update($data);
+
+        return redirect('admin/khoahoc/danhsach')->with('message','Bạn sửa thành công');
 
     }
     public function getXoa($id){

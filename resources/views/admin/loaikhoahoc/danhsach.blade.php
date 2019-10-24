@@ -65,8 +65,8 @@
                     @endforeach
                 </tbody>
             </table>
-                     
-                {!!$loaikhoahoc->render()!!}
+
+{{--                {!!$loaikhoahoc->render()!!}--}}
         </div>
 {{--        <footer class="panel-footer">--}}
 {{--            <div class="row">--}}

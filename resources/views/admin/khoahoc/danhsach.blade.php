@@ -5,7 +5,7 @@
 <div class="table-agile-info">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Danh sách loại khóa học
+            Danh sách khóa học
         </div>
         <div class="row w3-res-tb">
             <div class="col-sm-5 m-b-xs">
@@ -34,35 +34,59 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Tên loại khóa học</th>
+                        <th>Tên khóa học</th>
+                        <th>Tóm tắt</th>
+                        <th>Trả phí</th>
+                        <th>Giá khóa học</th>
+                        <th>Loại khóa học</th>
                         <th>Active</th>
                         <th style="width:30px;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($loaikhoahoc as $lkh)
-                        <tr>
-                            <td>{{$lkh->id}}</td>
-                            <td>{{$lkh->Ten}}</td>
-                            <td>
+                @foreach ($khoahoc as $kh)
+                    <tr>
+                        <td>{{$kh->id}}</td>
+                        <td>
+                            <p>{{$kh->Ten}}</p>
+                            <img style="width: 80px" src="upload/khoahoc/{{$kh->HinhAnh}}" alt="Hình">
+                        </td>
+                        <td>{{$kh->TomTat}}</td>
+                        <td>
+                            @if($kh->TraPhi == 0)
+                                {{"Miễn phí"}}
+                                @else
+                                {{"Trả phí"}}
+                            @endif
+
+                        </td>
+                        <td>{{$kh->GiaKhoaHoc}}</td>
+                        <td>
+                            @foreach ($loaikhoahoc as $lkh)
+                                @if($kh->idLoaiKhoaHoc == $lkh->id)
+                                    {{$lkh->Ten}}
+                                @endif
+                            @endforeach
+                        </td>
+                        <td>
                                 <span class="text-ellipsis">
-                                    @if($lkh->TrangThai==0)
-                                        <a href="admin/loaikhoahoc/deactive/{{$lkh->id}}"><button class="btn btn-info" style="width: 80px;">Ẩn</button></a>
+                                    @if($kh->TrangThai==0)
+                                        <a href="admin/khoahoc/deactive/{{$kh->id}}"><button class="btn btn-info" style="width: 80px;">Ẩn</button></a>
                                     @else
-                                        <a href="admin/loaikhoahoc/active/{{$lkh->id}}"><button class="btn btn-info" style="width: 80px;">Hiện</button></a>
+                                        <a href="admin/khoahoc/active/{{$kh->id}}"><button class="btn btn-info" style="width: 80px;">Hiện</button></a>
                                     @endif
                                 </span>
-                            </td>
-                            <td style="width:100px;">
-                                <a href="admin/loaikhoahoc/sua/{{$lkh->id}}" class="active action-icon" ui-toggle-class="">
-                                    <i class="fa fa-pencil-square-o text-success text-active"></i>
-                                </a>
-                                <a onclick="return confirm('Bạn có xác nhận xóa!')" href="admin/loaikhoahoc/xoa/{{$lkh->id}}" class="active action-icon" ui-toggle-class="">
-                                    <i class="fa fa-times text-danger text"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
+                        </td>
+                        <td style="width:100px;">
+                            <a href="admin/khoahoc/sua/{{$kh->id}}" class="active action-icon" ui-toggle-class="">
+                                <i class="fa fa-pencil-square-o text-success text-active"  ></i>
+                            </a>
+                            <a onclick="return confirm('Bạn có xác nhận xóa!')" href="admin/khoahoc/xoa/{{$kh->id}}" class="active action-icon" ui-toggle-class="">
+                                <i class="fa fa-times text-danger text " ></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
