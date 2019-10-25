@@ -36,7 +36,7 @@ Route::group(['prefix'=>'admin'],function () {
         // admin/loaikhoahoc/danhsach
         Route::get('danhsach','LoaiKhoaHocController@getDanhSach');
         Route::get('them','LoaiKhoaHocController@getThem');
-        Route::post('luu','LoaiKhoaHocController@postLuu');
+        Route::post('them','LoaiKhoaHocController@postThem');
 
         Route::get('deactive/{id}','LoaiKhoaHocController@getDeactive');
         Route::get('active/{id}','LoaiKhoaHocController@getActive');
@@ -44,15 +44,13 @@ Route::group(['prefix'=>'admin'],function () {
         Route::get('sua/{id}','LoaiKhoaHocController@getSua');
         Route::post('sua/{id}','LoaiKhoaHocController@postSua');
         Route::get('xoa/{id}','LoaiKhoaHocController@getXoa');
-
-
     });
 
     Route::group(['prefix' => 'khoahoc'], function () {
         // admin/khoahoc/danhsach
         Route::get('danhsach','KhoaHocController@getDanhSach');
         Route::get('them','KhoaHocController@getThem');
-        Route::post('luu','KhoaHocController@postLuu');
+        Route::post('them','KhoaHocController@postThem');
 
         Route::get('deactive/{id}','KhoaHocController@getDeactive');
         Route::get('active/{id}','KhoaHocController@getActive');
@@ -60,9 +58,25 @@ Route::group(['prefix'=>'admin'],function () {
         Route::get('sua/{id}','KhoaHocController@getSua');
         Route::post('sua/{id}','KhoaHocController@postSua');
         Route::get('xoa/{id}','KhoaHocController@getXoa');
-
-
     });
+
+    Route::group(['prefix' => 'baihoc'], function () {
+        // admin/baihoc/danhsach
+        Route::get('danhsach','BaiHocController@getDanhSach');
+        Route::get('them','BaiHocController@getThem');
+        Route::post('them','BaiHocController@postThem');
+
+        Route::get('deactive/{id}','BaiHocController@getDeactive');
+        Route::get('active/{id}','BaiHocController@getActive');
+
+        Route::get('sua/{id}','BaiHocController@getSua');
+        Route::post('sua/{id}','BaiHocController@postSua');
+        Route::get('xoa/{id}','BaiHocController@getXoa');
+    });
+
+    Route::get('ajax/loaikhoahoc/{idLoai}','AjaxController@getKhoaHoc');
+
+
 });
 
 

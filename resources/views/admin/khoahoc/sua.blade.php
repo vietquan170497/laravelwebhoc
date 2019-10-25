@@ -10,11 +10,22 @@
                 <div class="panel-body">
                     <div class="position-center">
                         <?php
-                        $message = Session::get('message');
-                        if($message){
-                            echo '<div class="alert alert-success" style="text-align: center">'.$message.'</div>';
-                            Session::put('message',null);
-                        }
+                            $message = Session::get('message');
+                            if($message){
+                                echo '<div class="alert alert-success" style="text-align: center">'.$message.'</div>';
+                                Session::put('message',null);
+                            }
+                            $loi = Session::get('loi');
+                            if($loi){
+                                echo '<div class="alert alert-danger" style="text-align: center">'.$loi.'</div>';
+                                Session::put('loi',null);
+                            }
+//                            $size = Session::get('size');
+//                            if($size){
+//                                echo '<div class="alert alert-danger" style="text-align: center">'.$size.'</div>';
+//                                Session::put('size',null);
+//                            }
+
                         ?>
                         @if(count($errors)>0)
                             <div class="alert alert-danger" style="text-align: center">
@@ -23,10 +34,27 @@
                                 @endforeach
                             </div>
                         @endif
+{{--                        @if(session('size'))--}}
+{{--                            <div class="alert alert-success">--}}
+{{--                                {{session('size')}}--}}
+{{--                            </div>--}}
+{{--                        @endif--}}
 
                         @foreach($khoahoc as $key=>$kh)
                         <form role="form" action="admin/khoahoc/sua/{{$kh->id}}" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Loại khóa học</label>
+                                <select class="form-control m-bot15" name="LoaiKhoaHoc">
+                                    @foreach($loaikhoahoc as $lkh)
+                                        @if($kh->idLoaiKhoaHoc == $lkh->id)
+                                            <option value="{{$lkh->id}}}" selected>{{$lkh->Ten}}</option>
+                                        @else
+                                            <option value="{{$lkh->id}}}">{{$lkh->Ten}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label >Tên khóa học</label>
                                 <input type="text" name="Ten" class="form-control" placeholder="Nhập tên khóa học" value="{{$kh->Ten}}">
@@ -64,14 +92,7 @@
                                            {{"disabled"}}
                                        @endif/>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Loại khóa học</label>
-                                <select class="form-control m-bot15" name="LoaiKhoaHoc">
-                                    @foreach($loaikhoahoc as $lkh)
-                                        <option value="{{$lkh->id}}}">{{$lkh->Ten}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Active</label>

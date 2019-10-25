@@ -15,6 +15,11 @@
                                 echo '<div class="alert alert-success" style="text-align: center">'.$message.'</div>';
                                 Session::put('message',null);
                             }
+                            $loi = Session::get('loi');
+                            if($loi){
+                            echo '<div class="alert alert-danger" style="text-align: center">'.$loi.'</div>';
+                            Session::put('loi',null);
+                            }
                         ?>
                         @if(count($errors)>0)
                             <div class="alert alert-danger" style="text-align: center">
@@ -26,7 +31,7 @@
                         <div id="validate_err" style="color: red">
 
                         </div>
-                        <form role="form" action="admin/loaikhoahoc/luu" method="post">
+                        <form role="form" action="admin/loaikhoahoc/them" method="post">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <div class="form-group">
                                 <label for="">Tên loại khóa học</label>

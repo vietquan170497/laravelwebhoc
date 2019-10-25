@@ -24,7 +24,7 @@ class LoaiKhoaHocController extends Controller
         return view('admin.index')->with('admin.loaikhoahoc.danhsach',$loaikhoahoc);
     }
 
-    public function postLuu(Request $request){
+    public function postThem(Request $request){
         $this->validate($request,
             [
                 'Ten'=>'required|min:3|unique:loaikhoahoc,Ten',

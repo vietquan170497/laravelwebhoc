@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                    Thêm loại khóa học
+                    Thêm khóa học
                 </header>
                 <div class="panel-body">
                     <div class="position-center">
@@ -15,6 +15,16 @@
                                 echo '<div class="alert alert-success" style="text-align: center">'.$message.'</div>';
                                 Session::put('message',null);
                             }
+                            $loi = Session::get('loi');
+                            if($loi){
+                                echo '<div class="alert alert-danger" style="text-align: center">'.$loi.'</div>';
+                                Session::put('loi',null);
+                            }
+//                            $size = Session::get('size');
+//                            if($size){
+//                                echo '<div class="alert alert-danger" style="text-align: center">'.$size.'</div>';
+//                                Session::put('size',null);
+//                            }
                         ?>
                         @if(count($errors)>0)
                             <div class="alert alert-danger" style="text-align: center">
@@ -24,7 +34,7 @@
                             </div>
                         @endif
 
-                        <form role="form" action="admin/khoahoc/luu" method="post" enctype="multipart/form-data">
+                        <form role="form" action="admin/khoahoc/them" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Loại khóa học</label>
