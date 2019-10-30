@@ -73,6 +73,19 @@ Route::group(['prefix'=>'admin'],function () {
         Route::post('sua/{id}','BaiHocController@postSua');
         Route::get('xoa/{id}','BaiHocController@getXoa');
     });
+    Route::group(['prefix' => 'user'], function () {
+        // admin/baihoc/danhsach
+        Route::get('danhsach','UserController@getDanhSach');
+        Route::get('them','UserController@getThem');
+        Route::post('them','UserController@postThem');
+
+        Route::get('deactive/{id}','UserController@getDeactive');
+        Route::get('active/{id}','UserController@getActive');
+
+        Route::get('sua/{id}','UserController@getSua');
+        Route::post('sua/{id}','UserController@postSua');
+        Route::get('xoa/{id}','UserController@getXoa');
+    });
 
     Route::get('ajax/loaikhoahoc/{idLoai}','AjaxController@getKhoaHoc');
 

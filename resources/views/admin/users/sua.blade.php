@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                    Thêm loại khóa học
+                    Sửa người dùng
                 </header>
                 <div class="panel-body">
                     <div class="position-center">
@@ -26,24 +26,26 @@
                         <div id="validate_err" style="color: red">
 
                         </div>
-                        <form role="form" action="admin/loaikhoahoc/them" method="post">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            <div class="form-group">
-                                <label for="">Tên loại khóa học</label>
-                                <input type="text" name="Ten" class="form-control" id="Ten" placeholder="Nhập tên loại khóa học">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Active</label>
-                                <select class="form-control m-bot15" name="TrangThai">
-                                    <option value="0">Deactive</option>
-                                    <option value="1">Active</option>
-                                </select>
-                            </div>
-
-                            <button type="submit" class="btn btn-info" id="btn_submit">Thêm</button>
-                            <input type="button" class="btn btn-info" value="Làm mới">
-                            <a href="admin/loaikhoahoc/danhsach"><input type="button" class="btn btn-info" value="Hủy"></a>
-                        </form>
+                        @foreach($users as $key=>$user)
+                            <form role="form" action="admin/user/sua/{{$user->id}}" method="post">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <div class="form-group">
+                                    <label for="">Tên người dùng</label>
+                                    <input type="text" name="name" class="form-control" id="Ten" placeholder="Nhập tên người dùng" value="{{$user->name}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Đổi mật khẩu</label>
+                                    <input type="password" name="password" class="form-control" id="Ten" placeholder="Nhập tên người dùng">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Tài Khoản</label>
+                                    <input type="text" name="TaiKhoan" class="form-control" id="Ten" placeholder="Nhập tài khoản" value="{{$user->TaiKhoan}}">
+                                </div>
+                                <button type="submit" class="btn btn-info" id="btn_submit">Sửa</button>
+                                <input type="button" class="btn btn-info" value="Làm mới">
+                                <a href="admin/user/danhsach"><input type="button" class="btn btn-info" value="Hủy"></a>
+                            </form>
+                        @endforeach
                     </div>
 
                 </div>

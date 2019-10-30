@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                    Thêm loại khóa học
+                    Thêm người dùng
                 </header>
                 <div class="panel-body">
                     <div class="position-center">
@@ -26,11 +26,23 @@
                         <div id="validate_err" style="color: red">
 
                         </div>
-                        <form role="form" action="admin/loaikhoahoc/them" method="post">
+                        <form role="form" action="admin/user/them" method="post">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <div class="form-group">
-                                <label for="">Tên loại khóa học</label>
-                                <input type="text" name="Ten" class="form-control" id="Ten" placeholder="Nhập tên loại khóa học">
+                                <label for="">Tên người dùng</label>
+                                <input type="text" name="name" class="form-control" id="Ten" placeholder="Nhập tên người dùng">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="text" name="email" class="form-control" id="Ten" placeholder="Nhập email người dùng">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Mật khẩu</label>
+                                <input type="password" name="password" class="form-control" id="Ten" placeholder="Nhập mật khẩu ">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tài Khoản</label>
+                                <input type="text" name="TaiKhoan" class="form-control" id="Ten" placeholder="Nhập tài khoản">
                             </div>
                             <div class="form-group">
                                 <label for="">Active</label>
@@ -42,7 +54,7 @@
 
                             <button type="submit" class="btn btn-info" id="btn_submit">Thêm</button>
                             <input type="button" class="btn btn-info" value="Làm mới">
-                            <a href="admin/loaikhoahoc/danhsach"><input type="button" class="btn btn-info" value="Hủy"></a>
+                            <a href="admin/user/danhsach"><input type="button" class="btn btn-info" value="Hủy"></a>
                         </form>
                     </div>
 

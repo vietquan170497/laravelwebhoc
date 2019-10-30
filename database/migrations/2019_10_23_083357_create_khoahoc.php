@@ -21,7 +21,8 @@ class CreateKhoahoc extends Migration
             $table->decimal('GiaKhoaHoc',15,2);
             $table->integer('idLoaiKhoaHoc',false,true);
             $table->integer('TrangThai');
-            $table->timestamps();
+            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 

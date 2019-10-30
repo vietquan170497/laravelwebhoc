@@ -22,7 +22,8 @@ class CreateBaihoc extends Migration
             $table->integer('SoLuotXem');
             $table->integer('idKhoaHoc',false,true);
             $table->integer('TrangThai');
-            $table->timestamps();
+            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 

@@ -73,9 +73,9 @@
                                 <td>
                                     <span class="text-ellipsis">
                                         @if($bh->TrangThai==0)
-                                            <a href="admin/khoahoc/deactive/{{$bh->id}}"><button class="btn btn-info" style="width: 80px;">Ẩn</button></a>
+                                            <a href="admin/baihoc/deactive/{{$bh->id}}"><button class="btn btn-info" style="width: 80px;">Ẩn</button></a>
                                         @else
-                                            <a href="admin/khoahoc/active/{{$bh->id}}"><button class="btn btn-info" style="width: 80px;">Hiện</button></a>
+                                            <a href="admin/baihoc/active/{{$bh->id}}"><button class="btn btn-info" style="width: 80px;">Hiện</button></a>
                                         @endif
                                     </span>
                                 </td>

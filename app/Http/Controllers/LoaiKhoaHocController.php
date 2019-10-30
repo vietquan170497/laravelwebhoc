@@ -77,8 +77,6 @@ class LoaiKhoaHocController extends Controller
         $data = array();
         $data['Ten'] = $request->Ten;
         DB::table('loaikhoahoc')->where('id',$id)->update($data);
-
-
         return redirect('admin/loaikhoahoc/danhsach')->with('message','Loại khóa học với id = '.$id.' sửa thành công');
     }
     public function getXoa($id){
