@@ -1,6 +1,7 @@
 @extends('admin.index')
 
 @section('admin_content')
+<div class="table-agile-info">
     <div class="row">
         <div class="col-lg-12">
             <section class="panel">
@@ -34,12 +35,13 @@
                                     <input type="text" name="name" class="form-control" id="Ten" placeholder="Nhập tên người dùng" value="{{$user->name}}">
                                 </div>
                                 <div class="form-group">
+                                    <input type="checkbox" id="passCheck" name="changePassword">
                                     <label for="">Đổi mật khẩu</label>
-                                    <input type="password" name="password" class="form-control" id="Ten" placeholder="Nhập tên người dùng">
+                                    <input type="password" name="password" class="form-control" id="passText" placeholder="Nhập mật khẩu" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Tài Khoản</label>
-                                    <input type="text" name="TaiKhoan" class="form-control" id="Ten" placeholder="Nhập tài khoản" value="{{$user->TaiKhoan}}">
+                                    <input type="text" name="TaiKhoan" class="form-control" placeholder="Nhập tài khoản" value="{{$user->TaiKhoan}}">
                                 </div>
                                 <button type="submit" class="btn btn-info" id="btn_submit">Sửa</button>
                                 <input type="button" class="btn btn-info" value="Làm mới">
@@ -47,15 +49,19 @@
                             </form>
                         @endforeach
                     </div>
-
                 </div>
             </section>
         </div>
     </div>
+</div>
 @endsection
 
-{{--@section('script')--}}
-{{--    <script type="text/javascript">--}}
+@section('script')
+    <script type="text/javascript">
+        document.getElementById('passCheck').onchange = function() {
+            document.getElementById('passText').disabled = !this.checked;
+        };
+
 {{--        var input_Ten = document.getElementById('Ten');--}}
 
 {{--        var div_message = document.getElementById('validate_err');--}}
@@ -73,5 +79,5 @@
 {{--            console.log(message);--}}
 {{--            div_message.innerHTML = message;--}}
 {{--        });--}}
-{{--    </script>--}}
-{{--@endsection--}}
+    </script>
+@endsection

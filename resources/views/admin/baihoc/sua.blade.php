@@ -128,14 +128,13 @@
         </div>
     </div>
 
-
-    <div class="table-agile-info">
+<div class="table-agile-info">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Danh sách loại khóa học
+                Danh sách các bình luận bài học
             </div>
             <div class="table-responsive">
-                <?php
+            <?php
                 $message = Session::get('message');
                 if($message){
                     echo '<div class="alert alert-success">'.$message.'</div>';
@@ -146,30 +145,27 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Tên loại khóa học</th>
-                        <th>Active</th>
-                        <th style="width:30px;">Action</th>
+                        <th>Người dùng</th>
+                        <th>Ngày tạo</th>
+                        <th>Nội dung</th>
+                        <th class="th_hanhdong">Hành động</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($loaikhoahoc as $lkh)
+                    @foreach ($binhluan as $bl)
                         <tr>
-                            <td>{{$lkh->id}}</td>
-                            <td>{{$lkh->Ten}}</td>
+                            <td>{{$bl->id}}</td>
                             <td>
-                                <span class="text-ellipsis">
-                                    @if($lkh->TrangThai==0)
-                                        <a href="admin/loaikhoahoc/deactive/{{$lkh->id}}"><button class="btn btn-info" style="width: 80px;">Ẩn</button></a>
-                                    @else
-                                        <a href="admin/loaikhoahoc/active/{{$lkh->id}}"><button class="btn btn-info" style="width: 80px;">Hiện</button></a>
+                                @foreach($users as $user)
+                                    @if($bl->idUser == $user->id)
+                                        {{$user->name}}
                                     @endif
-                                </span>
+                                @endforeach
                             </td>
+                            <td>{{$bl->created_at}}</td>
+                            <td>{{$bl->NoiDung}}</td>
                             <td style="width:100px;">
-                                <a href="admin/loaikhoahoc/sua/{{$lkh->id}}" class="active action-icon" ui-toggle-class="">
-                                    <i class="fa fa-pencil-square-o text-success text-active"  ></i>
-                                </a>
-                                <a onclick="return confirm('Bạn có xác nhận xóa!')" href="admin/loaikhoahoc/xoa/{{$lkh->id}}" class="active action-icon" ui-toggle-class="">
+                                <a onclick="return confirm('Bạn có xác nhận xóa!')" href="admin/binhluan/xoa/{{$bl->id}}" class="active action-icon action_delete" ui-toggle-class="">
                                     <i class="fa fa-times text-danger text " ></i>
                                 </a>
                             </td>
@@ -177,12 +173,9 @@
                     @endforeach
                     </tbody>
                 </table>
-
-                {{--                {!!$loaikhoahoc->render()!!}--}}
             </div>
         </div>
-    </div>
-
+</div>
 @endsection
 @section('script')
     <script>

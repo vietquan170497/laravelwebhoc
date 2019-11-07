@@ -8,18 +8,10 @@
             Danh sách loại khóa học
         </div>
         <div class="row w3-res-tb">
-            <div class="col-sm-5 m-b-xs">
-
+            <div class="col-sm-10 ">
             </div>
-            <div class="col-sm-4">
-            </div>
-            <div class="col-sm-3">
-                <div class="input-group">
-                    <input type="text" class="input-sm form-control" placeholder="Search">
-                    <span class="input-group-btn">
-                        <button class="btn btn-sm btn-default" type="button">Go!</button>
-                    </span>
-                </div>
+            <div class="col-sm-2">
+                <a href="admin/loaikhoahoc/them"><input type="button" class="btn btn-info col-sm-12" value="Thêm mới"></a>
             </div>
         </div>
         <div class="table-responsive">
@@ -35,8 +27,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Tên loại khóa học</th>
-                        <th>Active</th>
-                        <th style="width:30px;">Action</th>
+                        <th>Trạng thái</th>
+                        <th class="th_hanhdong">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,10 +47,10 @@
                             </td>
                             <td style="width:100px;">
                                 <a href="admin/loaikhoahoc/sua/{{$lkh->id}}" class="active action-icon" ui-toggle-class="">
-                                    <i class="fa fa-pencil-square-o text-success text-active"  ></i>
+                                    <i class="fa fa-pencil-alt text-success action_edit"></i>
                                 </a>
                                 <a onclick="return confirm('Bạn có xác nhận xóa!')" href="admin/loaikhoahoc/xoa/{{$lkh->id}}" class="active action-icon" ui-toggle-class="">
-                                    <i class="fa fa-times text-danger text " ></i>
+                                    <i class="fa fa-times text-danger action_delete " ></i>
                                 </a>
                             </td>
                         </tr>

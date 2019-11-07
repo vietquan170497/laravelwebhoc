@@ -20,11 +20,6 @@
                                 echo '<div class="alert alert-danger" style="text-align: center">'.$loi.'</div>';
                                 Session::put('loi',null);
                             }
-//                            $size = Session::get('size');
-//                            if($size){
-//                                echo '<div class="alert alert-danger" style="text-align: center">'.$size.'</div>';
-//                                Session::put('size',null);
-//                            }
                         ?>
                         @if(count($errors)>0)
                             <div class="alert alert-danger" style="text-align: center">
@@ -37,61 +32,27 @@
                         <form role="form" action="admin/slide/them" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Tên slide</label>
-                                <input type="text" name="Ten" class="form-control" id="" placeholder="Nhập tên khóa học">
+                                <label for="exampleInputEmail1">Tiêu đề slide</label>
+                                <input type="text" name="TieuDe" class="form-control" id="" placeholder="Nhập tiêu đề slide">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Hình ảnh</label>
                                 <input type="file" name="HinhAnh" class="form-control" id="" placeholder="Chọn hình ảnh">
                             </div>
-                            <div class="form-group" >
-                                <label>Khóa học trả phí : </label>
-                                <label class="radio-inline">
-                                    <input name="TraPhi" value="0" checked="" type="radio" onchange="chon(this)">  Không
-                                </label>
-                                <label class="radio-inline">
-                                    <input name="TraPhi" value="1" type="radio" onchange="chon(this)">  Có
-                                </label>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nội dung</label>
+                                <input type="text" name="NoiDung" class="form-control" id="" placeholder="Nhập nội dung">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Giá khóa học</label>
-                                <input type="text" name="GiaKhoaHoc" class="form-control" id="gia" placeholder="Nhập giá khóa học (với trường hợp khóa học trả phí)" disabled>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Active</label>
-                                <select class="form-control m-bot15" name="TrangThai">
-                                    <option value="0">Deactive</option>
-                                    <option value="1">Active</option>
-                                </select>
+                                <label for="exampleInputEmail1">Link truy cập</label>
+                                <input type="text" name="link" class="form-control" id="" placeholder="Nhập link truy cập">
                             </div>
                             <button type="submit" class="btn btn-info">Thêm</button>
-                            <input type="button" class="btn btn-info" value="Làm mới">
-                            <a href="admin/khoahoc/danhsach"><input type="button" class="btn btn-info" value="Hủy"></a>
+                            <a href="admin/slide/danhsach"><input type="button" class="btn btn-info" value="Hủy"></a>
                         </form>
                     </div>
-
                 </div>
             </section>
         </div>
     </div>
-@endsection
-@section('script')
-    <script>
-        // document.getElementById('traphi').onchange = function () {
-        //     document.getElementById("gia").disabled = (this.value === '0');
-        // }
-
-        function chon(obj)
-        {
-            var value = obj.value;
-            if (value === '1'){
-                $("#gia").removeAttr('disabled');
-            }
-            else {
-                $("#gia").attr('disabled','');
-            }
-        }
-    </script>
 @endsection

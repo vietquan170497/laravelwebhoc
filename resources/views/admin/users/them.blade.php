@@ -51,9 +51,7 @@
                                     <option value="1">Active</option>
                                 </select>
                             </div>
-
                             <button type="submit" class="btn btn-info" id="btn_submit">Thêm</button>
-                            <input type="button" class="btn btn-info" value="Làm mới">
                             <a href="admin/user/danhsach"><input type="button" class="btn btn-info" value="Hủy"></a>
                         </form>
                     </div>

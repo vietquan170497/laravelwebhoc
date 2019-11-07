@@ -1,6 +1,7 @@
 @extends('admin.index')
 
 @section('admin_content')
+<div class="table-agile-info">
     <div class="row">
         <div class="col-lg-12">
             <section class="panel">
@@ -20,12 +21,6 @@
                                 echo '<div class="alert alert-danger" style="text-align: center">'.$loi.'</div>';
                                 Session::put('loi',null);
                             }
-//                            $size = Session::get('size');
-//                            if($size){
-//                                echo '<div class="alert alert-danger" style="text-align: center">'.$size.'</div>';
-//                                Session::put('size',null);
-//                            }
-
                         ?>
                         @if(count($errors)>0)
                             <div class="alert alert-danger" style="text-align: center">
@@ -34,11 +29,6 @@
                                 @endforeach
                             </div>
                         @endif
-{{--                        @if(session('size'))--}}
-{{--                            <div class="alert alert-success">--}}
-{{--                                {{session('size')}}--}}
-{{--                            </div>--}}
-{{--                        @endif--}}
 
                         @foreach($khoahoc as $key=>$kh)
                         <form role="form" action="admin/khoahoc/sua/{{$kh->id}}" method="post" enctype="multipart/form-data">
@@ -121,6 +111,7 @@
             </section>
         </div>
     </div>
+</div>
 @endsection
 
 @section('script')

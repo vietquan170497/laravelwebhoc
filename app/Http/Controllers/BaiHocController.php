@@ -14,12 +14,22 @@ session_start();
 class BaiHocController extends Controller
 {
     //
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('admin/dashboard');
+        } else{
+            return Redirect::to('admin/login')->send();
+        }
+    }
     public function getThem(){
+        $this->AuthLogin();
         $loaikhoahoc = DB::table('loaikhoahoc')->orderBy('id','asc')->get();
         $khoahoc = DB::table('khoahoc')->orderBy('id','asc')->get();
         return view('admin.baihoc.them')->with('loaikhoahoc',$loaikhoahoc)->with('khoahoc',$khoahoc);
     }
     public function getDanhSach(){
+        $this->AuthLogin();
         $khoahoc = DB::table('khoahoc')->orderBy('id','asc')->get();
         $baihoc = DB::table('baihoc')->orderBy('id','asc')->get();
 
@@ -27,6 +37,7 @@ class BaiHocController extends Controller
     }
 
     public function postThem(Request $request){
+        $this->AuthLogin();
         $this->validate($request,
             [
                 'LoaiKhoaHoc'=>'required',
@@ -80,25 +91,31 @@ class BaiHocController extends Controller
     }
 
     public function getDeactive($id){
+        $this->AuthLogin();
         DB::table('baihoc')->where('id',$id)->update(['TrangThai'=>1]);
         Session::put('message','Trạng thái với id = '.$id.' được Hiện');
         return Redirect::to('admin/baihoc/danhsach');
     }
 
     public function getActive($id){
+        $this->AuthLogin();
         DB::table('baihoc')->where('id',$id)->update(['TrangThai'=>0]);
         Session::put('message','Trạng thái với id = '.$id.' được Ẩn');
         return Redirect::to('admin/baihoc/danhsach');
     }
 
     public function getSua($id){
+        $this->AuthLogin();
         $loaikhoahoc = DB::table('loaikhoahoc')->orderBy('id','asc')->get();
         $khoahoc = DB::table('khoahoc')->orderBy('id','asc')->get();
         $baihoc = DB::table('baihoc')->where('id',$id)->get();
+        $binhluan = DB::table('binhluan')->orderBy('id','asc')->get();
+        $users = DB::table('users')->orderBy('id','asc')->get();
 
-        return view('admin.baihoc.sua')->with('khoahoc',$khoahoc)->with('loaikhoahoc',$loaikhoahoc)->with('baihoc',$baihoc);
+        return view('admin.baihoc.sua')->with('khoahoc',$khoahoc)->with('loaikhoahoc',$loaikhoahoc)->with('baihoc',$baihoc)->with('binhluan',$binhluan)->with('users',$users);
     }
     public function postSua($id, Request $request){
+        $this->AuthLogin();
         $this->validate($request,
             [
                 'LoaiKhoaHoc'=>'required',
@@ -164,6 +181,7 @@ class BaiHocController extends Controller
 
     }
     public function getXoa($id){
+        $this->AuthLogin();
         DB::table('baihoc')->where('id',$id)->delete();
         Session::put('message','Bài học với id = '.$id.' xóa thành công');
         return Redirect::to('admin/baihoc/danhsach');

@@ -16,8 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('admin/login','AdminController@getLogin');
-Route::get('admin/index', 'AdminController@getIndex');
-
+Route::get('admin/', 'AdminController@getLogin');
 Route::get('admin/dashboard', 'AdminController@getDashboard');
 Route::post('admin/dashboard','AdminController@postDashboard');
 Route::get('admin/logout','AdminController@getLogout');
@@ -73,6 +72,7 @@ Route::group(['prefix'=>'admin'],function () {
         Route::post('sua/{id}','BaiHocController@postSua');
         Route::get('xoa/{id}','BaiHocController@getXoa');
     });
+
     Route::group(['prefix' => 'user'], function () {
         // admin/baihoc/danhsach
         Route::get('danhsach','UserController@getDanhSach');
@@ -87,7 +87,44 @@ Route::group(['prefix'=>'admin'],function () {
         Route::get('xoa/{id}','UserController@getXoa');
     });
 
-    Route::get('ajax/loaikhoahoc/{idLoai}','AjaxController@getKhoaHoc');
+    Route::group(['prefix' => 'slide'], function () {
+        // admin/baihoc/danhsach
+        Route::get('danhsach','SlideController@getDanhSach');
+        Route::get('them','SlideController@getThem');
+        Route::post('them','SlideController@postThem');
+
+        Route::get('deactive/{id}','SlideController@getDeactive');
+        Route::get('active/{id}','SlideController@getActive');
+
+        Route::get('sua/{id}','SlideController@getSua');
+        Route::post('sua/{id}','SlideController@postSua');
+        Route::get('xoa/{id}','SlideController@getXoa');
+    });
+
+    Route::group(['prefix' => 'binhluan'], function () {
+        Route::get('xoa/{id}','BinhLuanController@getXoa');
+    });
+
+    Route::group(['prefix' => 'dangkikhoahoc'], function () {
+        // admin/baihoc/danhsach
+        Route::get('danhsach','DangKiKhoaHocController@getDanhSach');
+        Route::get('them','DangKiKhoaHocController@getThem');
+        Route::post('them','DangKiKhoaHocController@postThem');
+
+        Route::get('deactive/{id}','DangKiKhoaHocController@getDeactive');
+        Route::get('active/{id}','DangKiKhoaHocController@getActive');
+
+        Route::get('sua/{id}','DangKiKhoaHocController@getSua');
+        Route::post('sua/{id}','DangKiKhoaHocController@postSua');
+        Route::get('xoa/{id}','DangKiKhoaHocController@getXoa');
+    });
+
+    Route::group(['prefix' => 'ajax'], function () {
+        Route::get('loaikhoahoc/{idLoai}','AjaxController@getKhoaHoc');
+        Route::get('dangki/{idKhoaHoc}','AjaxController@getGiaKhoaHoc');
+    });
+
+//    Route::get('ajax/loaikhoahoc/{idLoai}','AjaxController@getKhoaHoc');
 
 
 });

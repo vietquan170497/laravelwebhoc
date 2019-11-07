@@ -14,11 +14,21 @@ session_start();
 class KhoaHocController extends Controller
 {
     //
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('admin/dashboard');
+        } else{
+            return Redirect::to('admin/login')->send();
+        }
+    }
     public function getThem(){
+        $this->AuthLogin();
         $loaikhoahoc = DB::table('loaikhoahoc')->orderBy('id','asc')->get();
         return view('admin.khoahoc.them')->with('loaikhoahoc',$loaikhoahoc);
     }
     public function getDanhSach(){
+        $this->AuthLogin();
         $loaikhoahoc = DB::table('loaikhoahoc')->orderBy('id','asc')->get();
         $khoahoc = DB::table('khoahoc')->orderBy('id','asc')->get();
 
@@ -26,6 +36,7 @@ class KhoaHocController extends Controller
     }
 
     public function postThem(Request $request){
+        $this->AuthLogin();
         $this->validate($request,
             [
                 'LoaiKhoaHoc'=>'required',
@@ -91,24 +102,28 @@ class KhoaHocController extends Controller
     }
 
     public function getDeactive($id){
+        $this->AuthLogin();
         DB::table('khoahoc')->where('id',$id)->update(['TrangThai'=>1]);
         Session::put('message','Trạng thái với id = '.$id.' được Hiện');
         return Redirect::to('admin/khoahoc/danhsach');
     }
 
     public function getActive($id){
+        $this->AuthLogin();
         DB::table('khoahoc')->where('id',$id)->update(['TrangThai'=>0]);
         Session::put('message','Trạng thái với id = '.$id.' được Ẩn');
         return Redirect::to('admin/khoahoc/danhsach');
     }
 
     public function getSua($id){
+        $this->AuthLogin();
         $loaikhoahoc = DB::table('loaikhoahoc')->orderBy('id','asc')->get();
         $khoahoc = DB::table('khoahoc')->where('id',$id)->get();
 
         return view('admin.khoahoc.sua')->with('khoahoc',$khoahoc)->with('loaikhoahoc',$loaikhoahoc);
     }
     public function postSua($id, Request $request){
+        $this->AuthLogin();
         $this->validate($request,
             [
                 'LoaiKhoaHoc'=>'required',
@@ -176,6 +191,7 @@ class KhoaHocController extends Controller
 
     }
     public function getXoa($id){
+        $this->AuthLogin();
         DB::table('khoahoc')->where('id',$id)->delete();
         Session::put('message','Khóa học với id = '.$id.' xóa thành công');
         return Redirect::to('admin/khoahoc/danhsach');

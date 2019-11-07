@@ -23,7 +23,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <!-- font-awesome icons -->
     <link rel="stylesheet" href="admin_style/css/font.css" type="text/css"/>
-    <link href="admin_style/css/font-awesome.css" rel="stylesheet">
+{{--    <link href="admin_style/css/font-awesome.css" rel="stylesheet">--}}
+    <link href="admin_style/fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="admin_style/css/morris.css" type="text/css"/>
     <!-- calendar -->
     <link rel="stylesheet" href="admin_style/css/monthly.css">
@@ -42,8 +43,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <a href="{{URL::to('admin/dashboard')}}" class="logo">
                 ADMIN
             </a>
-            <div class="sidebar-toggle-box">
-                <div class="fa fa-bars"></div>
+            <div class="">
+                <div class=""></div>
             </div>
         </div>
         <!--logo end-->
@@ -89,50 +90,56 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="leftside-navigation">
                 <ul class="sidebar-menu" id="nav-accordion">
                     <li>
-                        <a class="active" href="{{URL::to('admin/dashboard')}}">
-                            <i class="fa fa-dashboard"></i>
+                        <a  href="admin/dashboard">
+                            <i class="fas fa-tachometer-alt"></i>
                             <span>Tổng quan</span>
                         </a>
                     </li>
                     <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-book"></i>
+                        <a href="admin/khoahoc/danhsach">
+                            <i class="fa fa-file-invoice"></i>
                             <span> Khóa học</span>
                         </a>
-                        <ul class="sub">
-                            <li><a href="admin/khoahoc/danhsach">Danh sách</a></li>
-                            <li><a href="admin/khoahoc/them">Thêm</a></li>
-                        </ul>
                     </li>
                     <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-book"></i>
+                        <a href="admin/loaikhoahoc/danhsach">
+                            <i class="far fa-calendar-alt"></i>
                             <span> Loại khóa học</span>
                         </a>
-                        <ul class="sub">
-                            <li><a href="admin/loaikhoahoc/danhsach">Danh sách</a></li>
-                            <li><a href="admin/loaikhoahoc/them">Thêm</a></li>
-                        </ul>
                     </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-book"></i>
+                    <li class="sub-menu active" href="">
+                        <a href="admin/baihoc/danhsach">
+                            <i class="fas fa-atlas" ></i>
                             <span> Bài học</span>
                         </a>
-                        <ul class="sub">
-                            <li><a href="admin/baihoc/danhsach">Danh sách</a></li>
-                            <li><a href="admin/baihoc/them">Thêm</a></li>
-                        </ul>
                     </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-book"></i>
+                    <li class="sub-menu active">
+                        <a href="admin/dangkikhoahoc/danhsach">
+                            <i class="fa fa-pen-alt"></i>
+                            <span> Đăng kí khóa học</span>
+                        </a>
+                    </li>
+{{--                    <li class="sub-menu active">--}}
+{{--                        <a href="admin/chitietkhoahoc/danhsach">--}}
+{{--                            <i class="fas fa-list-ol"></i>--}}
+{{--                            <span>Chi tiết đăng kí khóa học</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+                    <li class="sub-menu active">
+                        <a href="admin/user/danhsach">
+                            <i class="glyphicon glyphicon-user" style="color: white"></i>
                             <span> Users</span>
                         </a>
-                        <ul class="sub">
-                            <li><a href="admin/user/danhsach">Danh sách</a></li>
-                            <li><a href="admin/user/them">Thêm</a></li>
-                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="admin/slide/danhsach">
+                            <i class="far fa-clone"></i>
+                            <span> Slide</span>
+                        </a>
+{{--                        <ul class="sub">--}}
+{{--                            <li><a href="admin/slide/danhsach">Danh sách</a></li>--}}
+{{--                            <li><a href="admin/slide/them">Thêm</a></li>--}}
+{{--                        </ul>--}}
                     </li>
 
                 </ul>

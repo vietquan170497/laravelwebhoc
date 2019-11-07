@@ -1,6 +1,7 @@
 @extends('admin.index')
 
 @section('admin_content')
+<div class="table-agile-info">
     <div class="row">
         <div class="col-lg-12">
             <section class="panel">
@@ -41,7 +42,6 @@
                             </div>
 
                             <button type="submit" class="btn btn-info" id="btn_submit">Thêm</button>
-                            <input type="button" class="btn btn-info" value="Làm mới">
                             <a href="admin/loaikhoahoc/danhsach"><input type="button" class="btn btn-info" value="Hủy"></a>
                         </form>
                     </div>
@@ -50,6 +50,7 @@
             </section>
         </div>
     </div>
+</div>
 @endsection
 
 {{--@section('script')--}}

@@ -1,6 +1,7 @@
 @extends('admin.index')
 
 @section('admin_content')
+<div class="table-agile-info">
     <div class="row">
         <div class="col-lg-12">
             <section class="panel">
@@ -20,11 +21,6 @@
                                 echo '<div class="alert alert-danger" style="text-align: center">'.$loi.'</div>';
                                 Session::put('loi',null);
                             }
-//                            $size = Session::get('size');
-//                            if($size){
-//                                echo '<div class="alert alert-danger" style="text-align: center">'.$size.'</div>';
-//                                Session::put('size',null);
-//                            }
                         ?>
                         @if(count($errors)>0)
                             <div class="alert alert-danger" style="text-align: center">
@@ -79,7 +75,6 @@
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-info">Thêm</button>
-                            <input type="button" class="btn btn-info" value="Làm mới">
                             <a href="admin/khoahoc/danhsach"><input type="button" class="btn btn-info" value="Hủy"></a>
                         </form>
                     </div>
@@ -88,6 +83,7 @@
             </section>
         </div>
     </div>
+</div>
 @endsection
 @section('script')
     <script>

@@ -8,25 +8,17 @@
                 Danh sách bài học
             </div>
             <div class="row w3-res-tb">
-                <div class="col-sm-5 m-b-xs">
-
+                <div class="col-sm-10">
                 </div>
-                <div class="col-sm-4">
-                </div>
-                <div class="col-sm-3">
-                    <div class="input-group">
-                        <input type="text" class="input-sm form-control" placeholder="Search">
-                        <span class="input-group-btn">
-                        <button class="btn btn-sm btn-default" type="button">Go!</button>
-                    </span>
-                    </div>
+                <div class="col-sm-2">
+                    <a href="admin/baihoc/them"><input type="button" class="btn btn-info col-sm-12" value="Thêm mới"></a>
                 </div>
             </div>
             <div class="table-responsive">
                 <?php
                     $message = Session::get('message');
                     if($message){
-                        echo '<div class="alert alert-success">'.$message.'</div>';
+                        echo '<div class="alert alert-success" style="text-align: center">'.$message.'</div>';
                         Session::put('message',null);
                     }
                 ?>
@@ -40,18 +32,15 @@
                         <th>Nội dung</th>
                         <th>Nổi bật</th>
                         <th>Số lượt xem</th>
-                        <th>Active</th>
-                        <th style="width:30px;">Action</th>
+                        <th>Trạng thái</th>
+                        <th class="th_hanhdong">Hành động</th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach ($baihoc as $bh)
                             <tr>
                                 <td>{{$bh->id}}</td>
-                                <td>
-                                    <p>{{$bh->TieuDe}}</p>
-                                    <img style="width: 80px" src="upload/baihoc/{{$bh->HinhAnh}}" alt="Hình">
-                                </td>
+                                <td><p>{{$bh->TieuDe}}</p></td>
                                 <td>
                                     @foreach ($khoahoc as $kh)
                                         @if($bh->idKhoaHoc == $kh->id)
@@ -81,10 +70,10 @@
                                 </td>
                                 <td style="width:100px;">
                                     <a href="admin/baihoc/sua/{{$bh->id}}" class="active action-icon" ui-toggle-class="">
-                                        <i class="fa fa-pencil-square-o text-success text-active"  ></i>
+                                        <i class="fa fa-pencil-alt text-success action_edit"></i>
                                     </a>
                                     <a onclick="return confirm('Bạn có xác nhận xóa!')" href="admin/baihoc/xoa/{{$bh->id}}" class="active action-icon" ui-toggle-class="">
-                                        <i class="fa fa-times text-danger text "></i>
+                                        <i class="fa fa-times text-danger action_delete" ></i>
                                     </a>
                                 </td>
                             </tr>

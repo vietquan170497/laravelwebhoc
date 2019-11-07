@@ -8,25 +8,17 @@
             Danh sách khóa học
         </div>
         <div class="row w3-res-tb">
-            <div class="col-sm-5 m-b-xs">
-
+            <div class="col-sm-10 ">
             </div>
-            <div class="col-sm-4">
-            </div>
-            <div class="col-sm-3">
-                <div class="input-group">
-                    <input type="text" class="input-sm form-control" placeholder="Search">
-                    <span class="input-group-btn">
-                        <button class="btn btn-sm btn-default" type="button">Go!</button>
-                    </span>
-                </div>
+            <div class="col-sm-2">
+                <a href="admin/khoahoc/them"><input type="button" class="btn btn-info col-sm-12" value="Thêm mới"></a>
             </div>
         </div>
         <div class="table-responsive">
             <?php
             $message = Session::get('message');
             if($message){
-                echo '<div class="alert alert-success">'.$message.'</div>';
+                echo '<div class="alert alert-success" style="text-align: center">'.$message.'</div>';
                 Session::put('message',null);
             }
             ?>
@@ -39,8 +31,8 @@
                         <th>Trả phí</th>
                         <th>Giá khóa học</th>
                         <th>Loại khóa học</th>
-                        <th>Active</th>
-                        <th style="width:30px;">Action</th>
+                        <th>Trạng thái</th>
+                        <th class="th_hanhdong">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,7 +41,6 @@
                         <td>{{$kh->id}}</td>
                         <td>
                             <p>{{$kh->Ten}}</p>
-                            <img style="width: 80px" src="upload/khoahoc/{{$kh->HinhAnh}}" alt="Hình">
                         </td>
                         <td>{{$kh->TomTat}}</td>
                         <td>
@@ -79,10 +70,10 @@
                         </td>
                         <td style="width:100px;">
                             <a href="admin/khoahoc/sua/{{$kh->id}}" class="active action-icon" ui-toggle-class="">
-                                <i class="fa fa-pencil-square-o text-success text-active"  ></i>
+                                <i class="fa fa-pencil-alt text-success action_edit"  ></i>
                             </a>
                             <a onclick="return confirm('Bạn có xác nhận xóa!')" href="admin/khoahoc/xoa/{{$kh->id}}" class="active action-icon" ui-toggle-class="">
-                                <i class="fa fa-times text-danger text " ></i>
+                                <i class="fa fa-times text-danger action_delete " ></i>
                             </a>
                         </td>
                     </tr>

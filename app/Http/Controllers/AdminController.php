@@ -16,15 +16,26 @@ session_start();
 class AdminController extends Controller
 {
     //
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('admin/dashboard');
+        } else{
+            return Redirect::to('admin/login')->send();
+        }
+    }
+
     public function getLogin(){
         return view('admin.login');
     }
 
     public function getIndex(){
+        $this->AuthLogin();
         return view('admin.index');
     }
 
     public function getDashboard(){
+        $this->AuthLogin();
         return view('admin.dashboard');
     }
     public function postDashboard(Request $request){
@@ -33,8 +44,8 @@ class AdminController extends Controller
 
         $result = DB::table('admin')->where('email',$email)->where('password',$password)->first();
         if( isset( $result)){
-            Session::put('name',$result->name);
-            Session::put('id',$result->id);
+            Session::put('admin_name',$result->name);
+            Session::put('admin_id',$result->id);
             return Redirect::to('admin/dashboard');}
         else{
             Session::put('message',"Email hoặc password bị sai");
@@ -42,8 +53,9 @@ class AdminController extends Controller
         }
     }
     public function getLogout(){
-        Session::put('name',null);
-        Session::put('id',null);
+        $this->AuthLogin();
+        Session::put('admin_name',null);
+        Session::put('admin_id',null);
         return Redirect::to('admin/login');
     }
 }
